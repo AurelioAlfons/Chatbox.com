@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AI Chatbot</title>
+    <script src="https://cdn.jsdelivr.net/npm/@huggingface/tokenizers@0.10/dist/tokenizers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/transformers@4.10/dist/transformers.min.js"></script>
+</head>
+
+<body>
+    <div id="chat-container">
+        <div id="chat-display"></div>
+        <div id="user-input">
+            <input type="text" id="user-message" placeholder="Type a message...">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatDisplay = document.getElementById("chat-display");
+        const userMessageInput = document.getElementById("user-message");
+        const sendButton = document.getElementById("send-button");
+
+        // Load the chatbot model
+        const model = new transformers.DialoGPT2ForConditionalGeneration();
+        const tokenizer = new tokenizers.DialoGPT2Tokenizer();
+
+        sendButton.addEventListener("click", sendMessage);
+
+        async function sendMessage() {
+            const userMessage = userMessageInput.value;
+            displayMessage(userMessage, "user");
+            userMessageInput.value = "";
+
+            // Generate chatbot response
+            const response = await generateResponse(userMessage);
+            displayMessage(response, "bot");
+        }
+
+        async function generateResponse(userMessage) {
+            const input = `User: ${userMessage}\nBot:`;
+            const inputs = tokenizer.encode(input, { addSpecialTokens: false });
+
+            const output = await model.generate(inputs);
+            const response = tokenizer.decode(output[0], { skipSpecialTokens: true });
+
+            return response;
+        }
+
+        function displayMessage(message, sender) {
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add("message", sender);
+            messageDiv.textContent = message;
+            chatDisplay.appendChild(messageDiv);
+        }
+    </script>
+</body>
+
+</html>

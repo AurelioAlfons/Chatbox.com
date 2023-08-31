@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Explore Makassar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="chat-container">
+        <div id="chat-display"></div>
+        <div id="user-input">
+            <input type="text" id="user-message" placeholder="Type Hello or hello">
+            <button id="send-button">Submit</button>
+        </div>
+    </div>
+
+    <script>
+        const chatDisplay = document.getElementById("chat-display");
+        const userMessageInput = document.getElementById("user-message");
+        const sendButton = document.getElementById("send-button");
+
+        //Enter button
+        userMessageInput.addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                sendMessage();
+            }
+        });
+
+        sendButton.addEventListener("click", sendMessage);
+
+        // Variable to keep track of the conversation state
+        let conversationState = "initial";
+
+        function sendMessage() {
+            const userMessage = userMessageInput.value;
+            displayMessage(userMessage, "user");
+
+            // Clear the input field
+            userMessageInput.value = "";
+
+            // Process the user's message
+            processMessage(userMessage);
+        }
+
+        function displayMessage(message, sender) {
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add("message", sender);
+            messageDiv.textContent = message;
+            chatDisplay.appendChild(messageDiv);
+        }
+
+        function processMessage(message) {
+            const normalizedMessage = message.toLowerCase(); // Convert to lowercase
+            const options = ["meat", "seafood", "both", "vegetarian"]; // Lowercase options
+
+            if (conversationState === "initial") {
+                if (normalizedMessage === "hello") {
+                    displayMessage("Hello! What's your name?", "bot");
+                    conversationState = "waitingForName";
+                } else {
+                    displayMessage("I'm sorry, I didn't catch that.", "bot");
+                }
+            } else if (conversationState === "waitingForName") {
+                const userName = message.trim(); // Remove leading/trailing spaces
+                displayMessage("Hello, " + userName + "!", "bot");
+                conversationState = "nameReceived";
+            } else if (options.includes(normalizedMessage)) {
+                displayMessage("You chose: " + message, "user");
+                provideRecommendation(normalizedMessage);
+            } else {
+                displayMessage("I'm sorry, I didn't catch that.", "bot");
+            }
+        }
+
+        function provideRecommendation(choice) {
+            let recommendation = "";
+
+            switch (choice) {
+                case "meat":
+                    recommendation = "You should eat steak.";
+                    break;
+                case "seafood":
+                    recommendation = "You should visit the Seafood market.";
+                    break;
+                case "both":
+                    recommendation = "You can have a variety of options!";
+                    break;
+                case "vegetarian":
+                    recommendation = "You should go to the garden.";
+                    break;
+            }
+
+            displayMessage(recommendation, "bot");
+        }
+    </script>
+
+    <style>
+
+    </style>
+</body>
+
+</html>

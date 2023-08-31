@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Preference Questionnaire</title>
+  <style>
+    /* Styling the Body element i.e. Color,
+      Font, Alignment */
+    body {
+      background-image: url(image/wallpaperflare.com_wallpaper.jpg);
+      font-family: Verdana;
+      text-align: center;
+    }
+
+    /* Styling the Form (Color, Padding, Shadow) */
+    form {
+      background-color: #fff;
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 30px 20px;
+      box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Styling form-control Class */
+    .form-control {
+      text-align: left;
+      margin-bottom: 25px;
+    }
+
+    /* Styling form-control Label */
+    .form-control label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    /* Styling form-control input,
+      select, textarea */
+    .form-control input,
+    .form-control select,
+    .form-control textarea {
+      border: 1px solid #777;
+      border-radius: 2px;
+      font-family: inherit;
+      padding: 10px;
+      display: block;
+      width: 95%;
+    }
+
+    /* Styling form-control Radio
+      button and Checkbox */
+    .form-control input[type="radio"],
+    .form-control input[type="checkbox"] {
+      display: inline-block;
+      width: auto;
+    }
+
+    /* Styling Button */
+    button {
+      background-color: #05c46b;
+      border: 1px solid #777;
+      border-radius: 2px;
+      font-family: inherit;
+      font-size: 21px;
+      display: block;
+      width: 100%;
+      margin-top: 50px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Travel Preference Questionnaire</h1>
+
+  <form id="form">
+    <!-- Form -->
+    <!-- Name -->
+    <div class="form-control">
+      <label for="name" id="label-name">
+        Name
+      </label>
+
+      <input type="text" id="name" placeholder="Enter your name" />
+    </div>
+
+    <!-- email -->
+    <div class="form-control">
+      <label for="email" id="label-email">
+        Name
+      </label>
+
+      <input type="text" id="email" placeholder="Enter your email address" />
+    </div>
+
+    <!-- Age -->
+    <div class="form-control">
+      <label for="role" id="label-role">
+        Age :
+      </label>
+
+      <select name="role" id="role">
+        <option value="option1"> Less than 25 years</option>
+        <option value="option2"> 25-50 years</option>
+        <option value="option3"> More than 50 years</option>
+      </select>
+    </div>
+
+    <!-- Budget -->
+    <div class="form-control">
+      <label>Budget :</label>
+
+      <label for="budget_1">
+        <input type="radio" id="budget_1" name="budget"> Cheap</input>
+      </label>
+      <label for="budget_2">
+        <input type="radio" id="budget_2" name="budget"> Moderate</input>
+      </label>
+      <label for="budget_3">
+        <input type="radio" id="budget_3" name="budget"> Expensive</input>
+      </label>
+    </div>
+
+    <!-- activity -->
+    <div class="form-control">
+      <label>Activity :</label>
+
+      <label for="activity-1">
+        <input type="radio" id="activity-1" name="activity"> Nature tourism</input>
+      </label>
+      <label for="activity-2">
+        <input type="radio" id="activity-2" name="activity"> Cultural tourism</input>
+      </label>
+      <label for="activity-3">
+        <input type="radio" id="activity-3" name="activity"> Modern tourism</input>
+      </label>
+    </div>
+
+    <!-- Food -->
+    <div class="form-control">
+      <label>Food :</label>
+
+      <label for="food-1">
+        <input type="radio" id="food-1" name="food"> Local Cuisine</input>
+      </label>
+      <label for="food-2">
+        <input type="radio" id="food-2" name="food"> Other Asian Cuisine</input>
+      </label>
+      <label for="food-3">
+        <input type="radio" id="food-3" name="food"> Western/modern Cuisine</input>
+      </label>
+    </div>
+
+    <!-- If you eat animal products, yourfood preferences will be -->
+    <div class="form-control">
+      <label>If you eat animal products, yourfood preferences will be :</label>
+
+      <label for="preferences-1">
+        <input type="radio" id="preferences-1" name="preferences"> Beef, Goat, and so on</input>
+      </label>
+      <label for="preferences-2">
+        <input type="radio" id="preferences-2" name="preferences"> Seafood</input>
+      </label>
+      <label for="preferences-3">
+        <input type="radio" id="preferences-3" name="preferences"> Both</input>
+      </label>
+      <label for="preferences-3">
+        <input type="radio" id="preferences-3" name="preferences"> I don't eat meat</input>
+      </label>
+    </div>
+
+    <!-- Shopping -->
+    <div class="form-control">
+      <label>Do you want to shop by :</label>
+
+      <label for="shopping-1">
+        <input type="radio" id="shopping-1" name="shopping"> Traditional (in markets or small shops)</input>
+      </label>
+      <label for="shopping-2">
+        <input type="radio" id="shopping-2" name="shopping"> Modern (in a shopping center or mall)</input>
+      </label>
+      <label for="shopping-3">
+        <input type="radio" id="shopping-3" name="shopping"> Not interested in shopping</input>
+      </label>
+    </div>
+
+    <button type="submit" id="submit-button">
+      Submit
+    </button>
+
+  </form>
+
+  <div id="output" style="display: none;">
+    <h1>Recommendations</h1>
+    <p id="ai_recommendation">AI-generated recommendation text.</p>
+
+    <div id="budget_recommendation">
+      <h2>Recommendation for Budget</h2>
+      <p></p>
+    </div>
+
+    <div id="activity_recommendation">
+      <h2>Recommendation for Activity</h2>
+      <p></p>
+    </div>
+
+    <div id="food_recommendation">
+      <h2>Recommendation for Food</h2>
+      <p></p>
+    </div>
+
+    <div id="preferences_recommendation">
+      <h2>Recommendation for Preferences</h2>
+      <p></p>
+    </div>
+
+    <div id="shopping_recommendation">
+      <h2>Recommendation for Shopping</h2>
+      <p></p>
+    </div>
+  </div>
+
+  <script>
+    const recommendations = {
+      "budget_1": "Hotel Ramayana Makassar, Amaris Hotel Pettarani Makassar, and more.",
+      "budget_2": "Dalton Hotel Makassar, Whiz Prime Hotel Hasanuddin Makassar, and more.",
+      "budget_3": "Aston Makassar Hotel & Convention Center, Novotel Makassar Grand Shayla, and more.",
+      "activity-1": "Visit Nipah Mall and Pantai Losari for nature tourism.",
+      "activity-2": "Explore Monumen Mandala Pembebasan Irian Barat and more for cultural tourism.",
+      "activity-3": "Enjoy shopping at Mall Panakkukang and MTC Karebosi for modern tourism.",
+      "food-1": "Try Coto Alauddin 1, Restoran Sederhana Masakan Padang, and more for local cuisine.",
+      "food-2": "Savor Mie Titi Sulawesi and Pangsit Mie Tore 88 for other Asian cuisine.",
+      "food-3": "Experience HANGGAR TALASALAPANG and Echalote for Western/modern cuisine.",
+      "preferences-1": "Dine at Warung Pangkep Ratulangi and Sop Kaki Kambing & Sate Tiga Saudara for beef, goat, and other meats.",
+      "preferences-2": "Enjoy seafood at Rumah Makan & Seafood New Losari and New Makassar Seafood.",
+      "preferences-3": "Try dishes at Ayam Goreng & Seafood BUGURI Sudiang for both options.",
+      "preferences-4": "Explore vegetarian options at Rumah Makan Bravo and Cafe & Resto Ombak.",
+      "shopping-1": "Visit Pasar Butungg for traditional shopping experiences.",
+      "shopping-2": "Shop at Karebosi Link Mall and MALL RATU INDAH for modern shopping.",
+      "shopping-3": "Not interested in shopping."
+    };
+
+    document.getElementById("submit-button").addEventListener("click", function () {
+      // ... Your form input gathering ...
+      const age = document.querySelector("select[name='role']").value;
+      const budget = document.querySelector("input[name='budget']:checked").value;
+      const activity = document.querySelector("input[name='activity']:checked").value;
+      const food = document.querySelector("input[name='food']:checked").value;
+      const animalPreference = document.querySelector("input[name='preferences']:checked").value;
+      const shoppingPreference = document.querySelector("input[name='shopping']:checked").value;
+
+      const prompt = `Age: ${age}\nBudget: ${budget}\nActivity: ${activity}\nFood: ${food}\nAnimal product preference: ${animalPreference}\nShopping preference: ${shoppingPreference}\n`;
+
+      fetch("https://api.openai.com/v1/engines/davinci-codex/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer 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"
+        },
+        body: JSON.stringify({
+          prompt: prompt,
+          max_tokens: 100
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          const aiResponse = data.choices[0].text;
+
+          document.getElementById("ai_recommendation").textContent = aiResponse;
+
+          const budgetOption = document.querySelector("input[name='budget']:checked").id;
+          document.getElementById("budget_recommendation").querySelector("p").textContent = recommendations[budgetOption];
+
+          const activityOption = document.querySelector("input[name='activity']:checked").id;
+          document.getElementById("activity_recommendation").querySelector("p").textContent = recommendations[activityOption];
+
+          const foodOption = document.querySelector("input[name='food']:checked").id;
+          document.getElementById("food_recommendation").querySelector("p").textContent = recommendations[foodOption];
+
+          const preferencesOption = document.querySelector("input[name='preferences']:checked").id;
+          document.getElementById("preferences_recommendation").querySelector("p").textContent = recommendations[preferencesOption];
+
+          const shoppingOption = document.querySelector("input[name='shopping']:checked").id;
+          document.getElementById("shopping_recommendation").querySelector("p").textContent = recommendations[shoppingOption];
+
+          document.getElementById("output").style.display = "block";
+        })
+        .catch(error => console.error(error));
+    });
+  </script>
+
+</body>
+
+</html>
