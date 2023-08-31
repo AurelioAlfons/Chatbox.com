@@ -4,12 +4,13 @@
 <head>
     <title>Explore Makassar</title>
     <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
     <div id="chat-container">
         <div id="chat-display"></div>
-        <div id="user-input">
+        <div id="user-input" style="margin-top: 20px;"></div>
             <input type="text" id="user-message" placeholder="Type Hello or hello">
             <button id="send-button">Submit</button>
         </div>
@@ -64,6 +65,8 @@
             } else if (conversationState === "waitingForName") {
                 const userName = message.trim(); // Remove leading/trailing spaces
                 displayMessage("Hello, " + userName + "!", "bot");
+                displayMessage("What category would you like to explore?", "bot");
+                displayCategoryButtons();
                 conversationState = "nameReceived";
             } else if (options.includes(normalizedMessage)) {
                 displayMessage("You chose: " + message, "user");
@@ -71,6 +74,40 @@
             } else {
                 displayMessage("I'm sorry, I didn't catch that.", "bot");
             }
+        }
+
+        function displayCategoryButtons() {
+            const categoryButtonsDiv = document.createElement("div");
+            categoryButtonsDiv.classList.add("category-buttons");
+
+            const categories = [
+                "Budget accommodation",
+                "Activity type",
+                "Food type",
+                "Food preferences",
+                "Shopping areas"
+            ];
+
+            categories.forEach((category, index) => {
+                const categoryButton = document.createElement("button");
+                categoryButton.textContent = category;
+                categoryButton.addEventListener("click", () => handleCategoryClick(index + 1));
+                categoryButtonsDiv.appendChild(categoryButton);
+            });
+
+            chatDisplay.appendChild(categoryButtonsDiv);
+        }
+
+        function handleCategoryClick(categoryIndex) {
+            const categories = [
+                "Budget accommodation",
+                "Activity type",
+                "Food type",
+                "Food preferences",
+                "Shopping areas"
+            ];
+
+            displayMessage("You chose: " + categories[categoryIndex - 1], "user");
         }
 
         function provideRecommendation(choice) {
