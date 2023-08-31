@@ -11,6 +11,37 @@
     background-color: rgba(255, 255, 255, 0.9);
 }
 
+@media (max-width: 600px) {
+    #chat-container {
+        width: 100%;
+        /* Make the chat container full-width */
+        border-radius: 0;
+        /* Remove border radius for corners */
+        box-shadow: none;
+        /* Remove the box shadow */
+    }
+
+    #user-input {
+        display: flex;
+        flex-direction: column;
+        /* Stack input and button vertically */
+        align-items: center;
+        /* Center-align items horizontally */
+    }
+
+    #user-message {
+        width: 100%;
+        /* Make the input field full-width */
+        margin-bottom: 10px;
+        /* Add a small gap below the input */
+    }
+
+    #send-button {
+        width: 100%;
+        /* Make the button full-width */
+    }
+}
+
 .message {
     padding: 5px;
     margin: 5px;
