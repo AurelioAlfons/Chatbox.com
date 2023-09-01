@@ -44,7 +44,8 @@
 
 .message {
     padding: 5px;
-    margin: 10px 0; /* Adjust vertical margin as needed */
+    margin: 10px 0;
+    /* Adjust vertical margin as needed */
     border-radius: 5px;
 }
 
@@ -127,3 +128,44 @@ button {
     margin-bottom: 20px;
 }
 
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    left: -1px;
+    width: 100%;
+}
+
+.navbar a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    padding: 12px 20px;
+}
+
+.navbar h2 {
+    margin: 0;
+    padding: 10px 0;
+    color: white;
+}
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Chat container styles */
+#chat-container {
+    margin-top: 150px;
+    /* Adjust this value to create space below the navbar */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.message {
+    margin: 10px 0;
+}
