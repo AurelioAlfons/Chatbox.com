@@ -3,17 +3,47 @@
 
 <head>
     <title>Explore Makassar</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div class="msger-header-title">
+        <i class="fas fa-comment-alt"></i> SimpleChat
+    </div>
+    <div class="msger-header-options">
+        <link rel="stylesheet" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </div>
+    <div class="msg-bubble">
+        <div class="msg-info">
+            <div class="msg-info-name">BOT</div>
+            <div class="msg-info-time">12:45</div>
+        </div></div>
 </head>
 
-<body>
+<body data-spy="scroll" data-target="#navbar-site" data-offset="80">
+
+    <nav id="navbar-site" class="navbar navbar-dark bg-dark navbar-expand-sm fixed-top right">
+        <div class="container">
+
+            <a class="navbar-brand" href="#name">Explore Makassar Questionnare</a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+
+                <!--------------------------- Dropdown ---------------------------->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">A</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#modal">1</a>
+                </li>
+                <!-------------------------- Dropdown ----------------------------->
+            </ul>
+        </div>
+    </nav>
+
+
     <div id="chat-container">
         <div id="chat-display"></div>
         <div id="user-input" style="margin-top: 20px;"></div>
-            <input type="text" id="user-message" placeholder="Type Hello or hello">
-            <button id="send-button">Submit</button>
-        </div>
+        <input type="text" id="user-message" placeholder="Type Hello or hello">
+        <button id="send-button">Submit</button>
+    </div>
     </div>
 
     <script>

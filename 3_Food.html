@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Food</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div id="chat-container">
+        <div id="chat-display"></div>
+        <div id="user-input" style="margin-top: 20px;"></div>
+        <input type="text" id="user-message" placeholder="Type Hello or hello">
+        <button id="send-button">Submit</button>
+    </div>
+
+    <script>
+        const chatDisplay = document.getElementById("chat-display");
+        const userMessageInput = document.getElementById("user-message");
+        const sendButton = document.getElementById("send-button");
+
+        //Enter button
+        userMessageInput.addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                sendMessage();
+            }
+        });
+
+        sendButton.addEventListener("click", sendMessage);
+
+        // Variable to keep track of the conversation state
+        let conversationState = "initial";
+
+        function sendMessage() {
+            const userMessage = userMessageInput.value;
+            displayMessage(userMessage, "user");
+
+            // Clear the input field
+            userMessageInput.value = "";
+
+            // Process the user's message
+            processMessage(userMessage);
+        }
+
+        function displayMessage(message, sender) {
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add("message", sender);
+            messageDiv.textContent = message;
+            chatDisplay.appendChild(messageDiv);
+        }
+
+        function displayWelcomeMessage() {
+            displayMessage("Welcome to the Food Questionnaire!", "bot");
+            displayMessage("What is your food preference?", "bot");
+            displayActivityOptions();
+            conversationState = "waitingForFood";
+        }
+
+        function displayActivityOptions() {
+            displayMessage("Local", "price");
+            displayMessage("Asian", "price");
+            displayMessage("Western", "price");
+        }
+
+        function displayRecommendationsForLocal() {
+            displayMessage("Here are some recommendations for your Food:", "bot");
+            displayMessage("a", "bot");
+            displayMessage("b", "bot");
+            displayMessage("c", "bot");
+        }
+        function displayRecommendationsForAsian() {
+            displayMessage("Here are some recommendations for your Food:", "bot");
+            displayMessage("a", "bot");
+            displayMessage("b", "bot");
+            displayMessage("c", "bot");
+        }
+        function displayRecommendationsForWestern() {
+            displayMessage("Here are some recommendations for your Food:", "bot");
+            displayMessage("a", "bot");
+            displayMessage("b", "bot");
+            displayMessage("c", "bot");
+        }
+
+        function processMessage(message) {
+            const normalizedMessage = message.toLowerCase(); // Convert to lowercase
+            const ActivityOptions = ["local", "asian", "western"]; // Lowercase Activity options
+
+            if (conversationState === "initial") {
+                displayWelcomeMessage();
+            } else if (conversationState === "waitingForFood") {
+                if (ActivityOptions.includes(normalizedMessage)) {
+                    displayMessage("You chose Food: " + message, "user");
+                    if (normalizedMessage === "local") {
+                        displayRecommendationsForLocal();
+                    } else if (normalizedMessage === "asian") {
+                        displayRecommendationsForAsian();
+                    } else if (normalizedMessage === "western") {
+                        displayRecommendationsForWestern();
+                    }
+                } else {
+                    displayMessage("I'm sorry, I didn't catch that.", "bot");
+                }
+            } else {
+                displayMessage("I'm sorry, I didn't catch that.", "bot");
+            }
+        }
+    </script>
+
+</body>
+
+</html>

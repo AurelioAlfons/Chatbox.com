@@ -3,7 +3,7 @@
 
 <head>
     <title>Explore Makassar</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -11,9 +11,9 @@
     <div id="chat-container">
         <div id="chat-display"></div>
         <div id="user-input" style="margin-top: 20px;"></div>
-            <input type="text" id="user-message" placeholder="Type Hello or hello">
-            <button id="send-button">Submit</button>
-        </div>
+        <input type="text" id="user-message" placeholder="Type Hello or hello">
+        <button id="send-button">Submit</button>
+    </div>
     </div>
 
     <script>
@@ -92,6 +92,8 @@
                 const categoryButton = document.createElement("button");
                 categoryButton.textContent = category;
                 categoryButton.addEventListener("click", () => handleCategoryClick(index + 1));
+                categoryButton.style.display = "inline-block"; // Add this line to display buttons side by side
+                categoryButton.style.marginRight = "10px"; // Add some spacing between buttons
                 categoryButtonsDiv.appendChild(categoryButton);
             });
 
@@ -107,7 +109,24 @@
                 "Shopping areas"
             ];
 
-            displayMessage("You chose: " + categories[categoryIndex - 1], "user");
+            const chosenCategory = categories[categoryIndex - 1];
+            displayMessage("You chose: " + chosenCategory, "user");
+
+            // Redirect to the corresponding category page
+            switch (chosenCategory.toLowerCase()) {
+                case "budget accommodation":
+                    window.location.href = "1_budget.html";
+                    break;
+                case "activity type":
+                    window.location.href = "2_activity.html";
+                    break;
+                case "food type":
+                    window.location.href = "3_food.html"; 
+                    break;
+                // Add similar cases for other categories
+                default:
+                    break;
+            }
         }
 
         function provideRecommendation(choice) {
