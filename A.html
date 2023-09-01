@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Explore Makassar</title>
+    <link rel="stylesheet" href="css/2.css">
+    <link rel="JS" href="js/script.js">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <section class="msger">
+        <header class="msger-header">
+            <div class="msger-header-title">
+                <i class="fas fa-comment-alt"></i> Explore Makassar Questionnaire
+            </div>
+            <div class="msger-header-options">
+                <span><i class="fas fa-cog"></i></span>
+            </div>
+        </header>
+
+        <main class="msger-chat" id="chat-display">
+            <div class="msg left-msg">
+                <div class="msg-img" style="background-image: url()"></div>
+                <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">Explore Makassar</div>
+                        <div class="msg-info-time">12:45</div>
+                    </div>
+                    <div class="msg-text">
+                        Hello! What's your name?
+                    </div>
+                </div>
+            </div>
+            <!-- More chat messages can be added here -->
+        </main>
+
+        <form class="msger-inputarea">
+            <input type="text" class="msger-input" id="user-message" placeholder="Enter your message...">
+            <button type="submit" class="msger-send-btn">Send</button>
+        </form>
+    </section>
+
+    <script>
+        const msgerForm = document.querySelector(".msger-inputarea");
+        const msgerInput = document.querySelector(".msger-input");
+        const msgerChat = document.querySelector(".msger-chat");
+
+        // Your existing JavaScript code for chat functionality here
+        // ...
+    </script>
+
+    <style>
+        /* Your existing CSS styles here */
+        /* ... */
+    </style>
+</body>
+
+</html>

@@ -2,169 +2,125 @@
 <html>
 
 <head>
-    <title>Explore Makassar</title>
-    <div class="msger-header-title">
-        <i class="fas fa-comment-alt"></i> SimpleChat
-    </div>
-    <div class="msger-header-options">
-        <link rel="stylesheet" href="style.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </div>
-    <div class="msg-bubble">
-        <div class="msg-info">
-            <div class="msg-info-name">BOT</div>
-            <div class="msg-info-time">12:45</div>
-        </div></div>
+    <title>Beta</title>
+    <link rel="stylesheet" href="css/2.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body data-spy="scroll" data-target="#navbar-site" data-offset="80">
+<body>
+    <section class="msger">
+        <header class="msger-header">
+            <div class="msger-header-title">
+                <i class="fas fa-comment-alt"></i> Questionnaire
+            </div>
+            <div class="msger-header-options">
+                <span><i class="fas fa-cog"></i></span>
+            </div>
+        </header>
 
-    <nav id="navbar-site" class="navbar navbar-dark bg-dark navbar-expand-sm fixed-top right">
-        <div class="container">
+        <main class="msger-chat">
+            <div class="msg left-msg">
+                <div class="msg-img" style="background-image: url()"></div>
+                <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">Explore Makassar</div>
+                        <div class="msg-info-time">12:45</div>
+                    </div>
+                    <div class="msg-text">
+                        Hello, What's your name?. 😄
+                    </div>
+                </div>
+            </div>
 
-            <a class="navbar-brand" href="#name">Explore Makassar Questionnare</a>
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+            <div class="msg right-msg">
+                <div class="msg-img"
+                    style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"></div>
+                <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">User</div>
+                        <div class="msg-info-time">12:46</div>
+                    </div>
+                    <div class="msg-text">
+                        You can change your name in JS section!
+                    </div>
+                </div>
+            </div>
+        </main>
 
-                <!--------------------------- Dropdown ---------------------------->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">A</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#modal">1</a>
-                </li>
-                <!-------------------------- Dropdown ----------------------------->
-            </ul>
-        </div>
-    </nav>
-
-
-    <div id="chat-container">
-        <div id="chat-display"></div>
-        <div id="user-input" style="margin-top: 20px;"></div>
-        <input type="text" id="user-message" placeholder="Type Hello or hello">
-        <button id="send-button">Submit</button>
-    </div>
-    </div>
+        <form class="msger-inputarea">
+            <input type="text" class="msger-input" placeholder="Enter your message...">
+            <button type="submit" class="msger-send-btn">Send</button>
+        </form>
+    </section>
 
     <script>
-        const chatDisplay = document.getElementById("chat-display");
-        const userMessageInput = document.getElementById("user-message");
-        const sendButton = document.getElementById("send-button");
+        const msgerForm = document.querySelector(".msger-inputarea");
+        const msgerInput = document.querySelector(".msger-input");
+        const msgerChat = document.querySelector(".msger-chat");
 
-        //Enter button
-        userMessageInput.addEventListener("keyup", function (event) {
-            if (event.keyCode === 13) {
-                sendMessage();
-            }
+        const BOT_MSGS = [
+            "Hi, how are you?",
+            "Ohh... I can't understand what you trying to say. Sorry!",
+            "Sorry if my answers are not relevant. :))"
+        ];
+
+        const BOT_IMG = "https://image.flaticon.com/icons/svg/327/327779.svg";
+        const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
+        const BOT_NAME = "BOT";
+        const PERSON_NAME = "User";
+
+        msgerForm.addEventListener("submit", event => {
+            event.preventDefault();
+
+            const msgText = msgerInput.value;
+            if (!msgText) return;
+
+            appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
+            msgerInput.value = "";
+
+            botResponse();
         });
 
-        sendButton.addEventListener("click", sendMessage);
+        function appendMessage(name, img, side, text) {
+            const msgHTML = `
+                <div class="msg ${side}-msg">
+                    <div class="msg-img" style="background-image: url(${img})"></div>
+                    <div class="msg-bubble">
+                        <div class="msg-info">
+                            <div class="msg-info-name">${name}</div>
+                            <div class="msg-info-time">${formatDate(new Date())}</div>
+                        </div>
+                        <div class="msg-text">${text}</div>
+                    </div>
+                </div>
+            `;
 
-        // Variable to keep track of the conversation state
-        let conversationState = "initial";
-
-        function sendMessage() {
-            const userMessage = userMessageInput.value;
-            displayMessage(userMessage, "user");
-
-            // Clear the input field
-            userMessageInput.value = "";
-
-            // Process the user's message
-            processMessage(userMessage);
+            msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+            msgerChat.scrollTop += 500;
         }
 
-        function displayMessage(message, sender) {
-            const messageDiv = document.createElement("div");
-            messageDiv.classList.add("message", sender);
-            messageDiv.textContent = message;
-            chatDisplay.appendChild(messageDiv);
+        function botResponse() {
+            const r = random(0, BOT_MSGS.length - 1);
+            const msgText = BOT_MSGS[r];
+            const delay = msgText.split(" ").length * 100;
+
+            setTimeout(() => {
+                appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+            }, delay);
         }
 
-        function processMessage(message) {
-            const normalizedMessage = message.toLowerCase(); // Convert to lowercase
-            const options = ["meat", "seafood", "both", "vegetarian"]; // Lowercase options
-
-            if (conversationState === "initial") {
-                if (normalizedMessage === "hello") {
-                    displayMessage("Hello! What's your name?", "bot");
-                    conversationState = "waitingForName";
-                } else {
-                    displayMessage("I'm sorry, I didn't catch that.", "bot");
-                }
-            } else if (conversationState === "waitingForName") {
-                const userName = message.trim(); // Remove leading/trailing spaces
-                displayMessage("Hello, " + userName + "!", "bot");
-                displayMessage("What category would you like to explore?", "bot");
-                displayCategoryButtons();
-                conversationState = "nameReceived";
-            } else if (options.includes(normalizedMessage)) {
-                displayMessage("You chose: " + message, "user");
-                provideRecommendation(normalizedMessage);
-            } else {
-                displayMessage("I'm sorry, I didn't catch that.", "bot");
-            }
+        function formatDate(date) {
+            const h = "0" + date.getHours();
+            const m = "0" + date.getMinutes();
+            return `${h.slice(-2)}:${m.slice(-2)}`;
         }
 
-        function displayCategoryButtons() {
-            const categoryButtonsDiv = document.createElement("div");
-            categoryButtonsDiv.classList.add("category-buttons");
-
-            const categories = [
-                "Budget accommodation",
-                "Activity type",
-                "Food type",
-                "Food preferences",
-                "Shopping areas"
-            ];
-
-            categories.forEach((category, index) => {
-                const categoryButton = document.createElement("button");
-                categoryButton.textContent = category;
-                categoryButton.addEventListener("click", () => handleCategoryClick(index + 1));
-                categoryButtonsDiv.appendChild(categoryButton);
-            });
-
-            chatDisplay.appendChild(categoryButtonsDiv);
-        }
-
-        function handleCategoryClick(categoryIndex) {
-            const categories = [
-                "Budget accommodation",
-                "Activity type",
-                "Food type",
-                "Food preferences",
-                "Shopping areas"
-            ];
-
-            displayMessage("You chose: " + categories[categoryIndex - 1], "user");
-        }
-
-        function provideRecommendation(choice) {
-            let recommendation = "";
-
-            switch (choice) {
-                case "meat":
-                    recommendation = "You should eat steak.";
-                    break;
-                case "seafood":
-                    recommendation = "You should visit the Seafood market.";
-                    break;
-                case "both":
-                    recommendation = "You can have a variety of options!";
-                    break;
-                case "vegetarian":
-                    recommendation = "You should go to the garden.";
-                    break;
-            }
-
-            displayMessage(recommendation, "bot");
+        function random(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
         }
     </script>
 
-    <style>
-
-    </style>
+    <style></style>
 </body>
 
 </html>
